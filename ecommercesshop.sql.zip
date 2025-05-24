@@ -1,0 +1,573 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 22, 2025 at 06:26 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `ecommercesshop`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `phone` varchar(30) NOT NULL,
+  `address` text NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL DEFAULT 'Active',
+  `type` enum('Admin','Staff') NOT NULL DEFAULT 'Staff',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `phone`, `address`, `status`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Tuan NGUYEN', 'pentest@gmail.com', '2023-11-23 05:02:40', '123456', '123456123456123456123456', '0909090909', 'Tp.Hcm', 'Active', 'Admin', NULL, NULL),
+(2, 'Nhan Vien', 'nv1@gmail.com', '2023-11-23 05:02:40', '123456', '123456123456123456123456', '0909090909', 'Tp.Hcm', 'Active', 'Staff', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `name`, `slug`, `status`, `created_at`, `updated_at`) VALUES
+(5, 'No brands', 'no-brands', 'Active', NULL, NULL),
+(10, 'Demo 2222', 'demo-2222', 'Active', NULL, NULL),
+(11, 'udemy', 'udemy', 'Active', NULL, NULL),
+(12, 'Coursera', 'coursera', 'Active', NULL, NULL),
+(13, 'test1', 'test1', 'Active', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `slug`, `status`, `created_at`, `updated_at`) VALUES
+(10, 'IT & Software', 'it-software', 'Active', NULL, NULL),
+(11, 'Bussiness', 'bussiness', 'Active', NULL, NULL),
+(12, 'Personal Development', 'personal-development', 'Active', NULL, NULL),
+(13, 'Marketing', 'marketing', 'Active', NULL, NULL),
+(14, 'test1', 'test1', 'Active', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2023_10_03_123426_create_admins_table', 1),
+(6, '2023_10_03_130747_create_categories_table', 2),
+(7, '2023_10_03_130946_create_brands_table', 2),
+(8, '2023_10_03_132635_create_products_table', 3),
+(9, '2023_10_03_135606_create_reviews_table', 4),
+(10, '2023_10_04_080710_create_orders_table', 5),
+(11, '2023_10_04_081411_create_order_details_table', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `avatar` varchar(200) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `sumary` text NOT NULL,
+  `description` text NOT NULL,
+  `newscategory_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newscategories`
+--
+
+CREATE TABLE `newscategories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `status` enum('Active','Innactive') NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `status` enum('Processing','Confirmed','Shipping','Delivered','Cancelled') NOT NULL DEFAULT 'Processing',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `firstname`, `lastname`, `address`, `phone`, `email`, `status`, `created_at`, `updated_at`) VALUES
+(9, 0, 'Nguyen', 'Tuan', 'Hiệp Bình Phước', '0395414762', 'pentest@gmail.com', 'Processing', '2025-05-22 16:24:10', '2025-05-22 16:24:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `price` double NOT NULL,
+  `qty` tinyint(4) NOT NULL,
+  `total` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `price`, `qty`, `total`, `created_at`, `updated_at`) VALUES
+(1, 7, 17, 12000, 1, 12000, '2023-11-12 15:15:00', '2023-11-12 15:15:00'),
+(2, 7, 14, 50000, 1, 50000, '2023-11-12 15:15:00', '2023-11-12 15:15:00'),
+(3, 7, 18, 80000, 1, 80000, '2023-11-12 15:15:00', '2023-11-12 15:15:00'),
+(4, 8, 21, 888888, 1, 888888, '2023-11-14 10:55:17', '2023-11-14 10:55:17'),
+(5, 9, 36, 3000000, 1, 3000000, '2025-05-22 16:24:10', '2025-05-22 16:24:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `summary` text NOT NULL,
+  `stock` tinyint(3) UNSIGNED NOT NULL,
+  `unit` varchar(50) DEFAULT NULL,
+  `price` double NOT NULL,
+  `disscounted_price` double NOT NULL,
+  `images` text NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `brand_id` bigint(20) UNSIGNED NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `slug`, `description`, `summary`, `stock`, `unit`, `price`, `disscounted_price`, `images`, `category_id`, `brand_id`, `status`, `created_at`, `updated_at`) VALUES
+(31, 'Ultimate AWS Certified Solutions Architect Associate 2025', 'ultimate-aws-certified-solutions-architect-associate-2025', 'Full Practice Exam | Learn Cloud Computing | Pass the AWS Certified Solutions Architect Associate Certification SAA-C03!', '', 10, NULL, 1000000, 2000000, 'uploads/682f46bd6b58b_pro1.png', 10, 5, 'Active', NULL, NULL),
+(32, 'Learn Ethical Hacking From Scratch', 'learn-ethical-hacking-from-scratch', 'Welcome this comprehensive Ethical Hacking course! This course assumes you have NO prior knowledge! It starts with you from scratch and takes you step-by-step teaching you how to hack systems like black-hat hackers and secure them like security experts!\r\n\r\n\r\n\r\nThis course is highly practical but it won\'t neglect the theory; we\'ll start with ethical hacking basics, breakdown the different penetration testing fields and install the needed software (on Windows, Linux and Apple Mac OS), then we\'ll dive and start hacking straight away. You\'ll learn everything by example, by analysing and exploiting different systems such as networks, cloud servers, clients, websites, etc. No boring dry lectures.\r\n\r\n\r\n\r\nThe course is divided into a number of sections, each section covers a penetration testing / hacking field, in each of these sections you\'ll first learn how the target system works, the weaknesses of this system, and how to practically exploit theses weaknesses to hack this system. As we do this I will also introduce you to different hacking and security concepts, tools and techniques. Everything will be taught through examples and hands-on practicals, there will be no useless or boring lectures!', '', 10, NULL, 1500000, 2000000, 'uploads/682f484cd7db3_pro2.png', 10, 5, 'Active', NULL, NULL),
+(33, 'Python And Django Framework For Beginners Complete Course', 'python-and-django-framework-for-beginners-complete-course', 'Learn Python From Scratch Beginner to Expert Python.Start from the Python basics and go all the way to creating your own applications and games!\r\n\r\nI’ve created thorough, extensive, but easy to follow content which you’ll easily understand and absorb.\r\n\r\nThe course starts with the basics, including Python fundamentals, programming, and user interaction.\r\n\r\n\r\n\r\nThe curriculum is going to be very hands-on as we walk you from start to finish becoming a professional Python developer. We will start from the very beginning by teaching you Python basics and programming fundamentals, and then going into advanced topics and different career fields in Python so you can get real-life practice and be ready for the real world.', '', 100, NULL, 2000000, 3000000, 'uploads/682f48a88cb2c_pro3.png', 10, 5, 'Active', NULL, NULL),
+(34, 'CompTIA Security+ (SY0-701) Complete Course & Practice Exam', 'comptia-security-sy0-701-complete-course-practice-exam', '** Taught by a Best Selling IT Certification Instructor **\r\n\r\n\r\n\r\nTaught by an expert in information technology and cybersecurity with over 20 years of experience, this course is a fun way to master the fundamentals of computer security.\r\n\r\n\r\n\r\nYou will learn the fundamentals of cybersecurity and gain experience in the configuration, management, and troubleshooting of common wired and wireless networks with lessons, lectures, and video demonstrations to teach you everything you need to know to pass the CompTIA Security+ exam.\r\n\r\n\r\n\r\nCompTIA Security+ (SY0-701) is the world\'s most popular cybersecurity certification today!', '', 100, NULL, 2000000, 3000000, 'uploads/682f49152fc44_pro4.png', 10, 5, 'Active', NULL, NULL),
+(35, 'Python For Beginners Course In-Depth', 'python-for-beginners-course-in-depth', 'Python For Beginners Course In-Depth\r\n\r\nThis course serves as a comprehensive introduction to fundamental Python programming concepts, offering a journey from beginner to advanced levels. With meticulously crafted content, you\'ll find it easy to follow and absorb, ensuring a solid understanding of Python.\r\n\r\nStarting from the basics, we cover essential Python fundamentals, programming techniques, and user interaction. The curriculum emphasizes hands-on learning, guiding you through becoming a proficient Python developer.\r\n\r\nWe begin by laying a strong foundation in Python basics and programming fundamentals. As you progress, we explore advanced topics and diverse career fields within Python, providing real-life practice to prepare you for the professional world.', '', 100, NULL, 1900000, 3000000, 'uploads/682f497a2bed0_pro5.png', 10, 5, 'Active', NULL, NULL),
+(36, 'Zero to Hero in SQL: SQL for Data Analytics', 'zero-to-hero-in-sql-sql-for-data-analytics', 'Added a new section on how to practice SQL using fun case studies.\r\n\r\nAdded a new video on COALESCE function\r\n\r\nAdded a video on \"How Index works in SQL\"\r\n\r\nAdded more videos on interview-related theoretical topics at the end of the course\r\n\r\n6 Reasons why you should choose this SQL course\r\n\r\nCarefully designed curriculum teaching you everything in SQL that you will need for Data analysis in businesses\r\n\r\nComprehensive - covers basics, advanced SQL statements, PostgreSQL, mySQL, interview tips and performance tuning tips as well\r\n\r\nBusiness related examples and case studies based on SQL techniques, PostgreSQL, mySQL, data analysis techniques\r\n\r\nAmple practice exercises because, like any other data analysis tools, SQL requires practice\r\n\r\nDownloadable resources covering important topics on SQL\r\n\r\nYour queries on SQL and anything covered in the Masterclass will be responded by the Instructor himself', '', 100, NULL, 2000000, 3000000, 'uploads/682f49ead3eab_pro6.png', 11, 5, 'Active', NULL, NULL),
+(37, 'An Entire MBA in 1 Course:Award Winning Business School Prof', 'an-entire-mba-in-1-course-award-winning-business-school-prof', 'Are you ready to take your career to the next level? In this course, you will learn everything you need to know about business….from starting a company to taking it public. This course covers all of the important topics you will learn from getting an MBA from a top school + real life practical business concepts that will help make you more successful!\r\n\r\nThis course is taught by an award winning MBA professor with significant real world experience working at Goldman Sachs as well as in the venture capital, hedge fund and consulting industries (he has founded several companies and sits on several boards). Many business concepts are simply common sense. This course will focus on business concepts that you need to know that might not be common sense. This course makes the general business, accounting and finance process very easy to understand! The professor of this course is also the author of \"101 Crucial Lessons They Don\'t Teach You in Business School,\" which Forbes magazine recently called \"1 of 6 books that all entrepreneurs need to read right now.\"\r\n\r\nThe contents of this course are all based on my work experience at several firms, including Goldman Sachs, the consulting industry at Accenture, a few companies I have started, the hedge fund industry where I worked at Citadel and also in the venture capital sector (the firm I founded had a venture capital investment in Facebook).I included helpful practical business concepts I learned while I did an MBA at Columbia University and a Bachelor of Commerce degree at McGill University. Think of this course as a “greatest hits” business summaries from my MBA, undergraduate business degree, work experience in consulting, equities, hedge funds, venture capital and starting my own companies.\r\n\r\nI have minimized “boring theoretical concepts” in this course in order to keep it as close to reality as possible. The concepts of this course have been taught by me in many classes at several universities, where the student feedback has been universally and incredibly positive (please see my LinkedIn profile for student reviews / feedback on my teaching style/effectiveness - thank you. Also please see reviews of my books in Amazon and here in Udemy on my teaching - particularly in my Udemy course on \"101 Crucial Lessons They Don\'t Teach You in Business School\").\r\n\r\nAn Entire MBA In 1 Course ®  is a registered trademark of Haroun Education Ventures, Inc. The contents of the course are copyright © 2017 Haroun Education Ventures, Inc.', '', 100, NULL, 1900000, 4500000, 'uploads/682f4a3725b5a_pro7.png', 11, 5, 'Active', NULL, NULL),
+(38, 'PMP Certification Exam Prep Course 35 PDU Contact Hours/PDU', 'pmp-certification-exam-prep-course-35-pdu-contact-hours-pdu', 'This course has been fully updated for the Current PMP exam and is now over 35 hours of content with 350+ videos.\r\n\r\nCovers PMBOK Guide 7th Edition, Process Groups: A Practice Guide, Agile Practice Guide, and more. \r\n\r\nPassing the PMP certification exam is a must for any individual looking to move up the corporate ladder in any company. This course will cover all the topics needed to pass your PMP exam on the first try. This course includes coverage of traditional, Agile and hybrid projects.\r\n\r\nThis course is taught by Instructor and PMP author Andrew Ramdayal. Andrew has over 60 certifications and is the author of Amazon Bestselling PMP Study Guide, PMP Exam Prep Simplified. Andrew has taught this course to thousands of students around the world both in the classroom and online.', '', 100, NULL, 2000000, 4500000, 'uploads/682f4a7975f18_pro8.png', 11, 5, 'Active', NULL, NULL),
+(39, 'Deep Learning Prerequisites: The Numpy Stack in Python (V2+)', 'deep-learning-prerequisites-the-numpy-stack-in-python-v2-', 'The Lazy Programmer is a seasoned online educator with an unwavering passion for sharing knowledge. With over 10 years of experience, he has revolutionized the field of data science and machine learning by captivating audiences worldwide through his comprehensive courses and tutorials.\r\n\r\n\r\n\r\nEquipped with a multidisciplinary background, the Lazy Programmer holds a remarkable duo of master\'s degrees. His first foray into academia led him to pursue computer engineering, with a specialized focus on machine learning and pattern recognition. Undeterred by boundaries, he then ventured into the realm of statistics, exploring its applications in financial engineering.\r\n\r\n\r\n\r\nRecognized as a trailblazer in his field, the Lazy Programmer quickly embraced the power of deep learning when it was still in its infancy. As one of the pioneers, he fearlessly embarked on instructing one of the first-ever online courses on deep learning, catapulting him to the forefront of the industry.\r\n\r\n\r\n\r\nBeyond the realm of education, the Lazy Programmer possesses invaluable hands-on experience that has shaped his expertise. His ventures into online advertising and digital media have yielded astounding results, propelling click-through rates and conversion rates to new heights and boosting revenues by millions of dollars at the companies he\'s worked for. As a full-stack software engineer, he boasts intimate familiarity with an array of backend and web technologies, including Python, Ruby on Rails, C++, Scala, PHP, Javascript, SQL, big data, Spark, and Redis.\r\n\r\n\r\n\r\nWhile his achievements in the field of data science and machine learning are awe-inspiring, the Lazy Programmer\'s intellectual curiosity extends far beyond these domains. His fervor for knowledge leads him to explore diverse fields such as drug discovery, bioinformatics, and algorithmic trading. Embracing the challenges and intricacies of these subjects, he strives to unravel their potential and contribute to their development.\r\n\r\n\r\n\r\nWith an unwavering commitment to his students and a penchant for simplifying complex concepts, the Lazy Programmer stands as an influential figure in the realm of online education. Through his courses in data science, machine learning, deep learning, and artificial intelligence, he empowers aspiring learners to navigate the intricate landscapes of these disciplines with confidence.', '', 100, NULL, 1000000, 3000000, 'uploads/682f4acb5be73_pro9.png', 11, 5, 'Active', NULL, NULL),
+(40, 'Scrum Master Certification 2025 + Agile Scrum Certification', 'scrum-master-certification-2025-agile-scrum-certification', '\"Scrum Open, Professional Scrum, Professional Scrum Master, PSM, PSM I, PSM 1, etc. is the protected brand of Scrum . org. Our course and practice exams are neither endorsed by nor affiliated with Scrum . org.\"\r\n   \r\n\r\n  Three reasons to TAKE THIS COURSE right now! \r\n\r\n      The unique reasons for taking this course are: \r\n\r\nComplete, Concise, Confident Overview of  Scrum - You will be confident that you have learned Scrum as the founders intended because I only teach accurately from the rule-book of Scrum.\r\n\r\nConfidence in completing a Scrum Certification - I teach you everything you need to gain confidence in the exam and then guide you on how to get certified online without going into a class room or spending $1000. I send you to the Scrum Open Assessment so you can practice before taking the final certification (Exam purchased separately - I will give you links directly to it). You can then sit the PSM ( Professional Scrum Master ) which is more affordable or use this as extra preparation for your CSM ( Certified Scrum Master ) exam / training.\r\n\r\nYou get to ask me questions and see me respond to every single one of them thoughtfully!\r\n\r\nUpdated for 2025 using the newest v 2020 Scrum guide. Perfect for [2020] Scrum Guide exam preparation! This course is based on the\r\n\r\nIncludes Narration from Ted R. Brown', '', 100, NULL, 2000000, 4500000, 'uploads/682f4b16f2939_pro10.png', 11, 5, 'Active', NULL, NULL),
+(41, 'The Complete Digital Marketing Course - 12 Courses in 1', 'the-complete-digital-marketing-course---12-courses-in-1', 'Join 500,000+ students in the best-selling digital marketing course on Udemy!\r\n\r\nWith over 20 hours of training, quizzes, and practical steps you can follow - this is one of the most comprehensive digital marketing courses available. We\'ll cover SEO, YouTube Marketing, Facebook Marketing, Google Adwords, Google Analytics, and more!\r\n\r\nLearn By Doing\r\n\r\nThe course is hugely interactive with projects, checklists & actionable lectures built into every section.\r\n\r\nLearn step by step how to market a business online from scratch across all the major marketing channels.\r\n\r\nFollow the steps on-screen to get results at work, for your own business, or for your digital marketing clients.\r\n\r\n12 Courses in 1\r\n\r\nCovering 12 major online marketing topics and comprising 20+ hours of clear-cut lectures & practice activities - this course is \"incredible value for money!\" as one student said.', '', 10, NULL, 2000000, 3000000, 'uploads/682f4be621cdf_pro11.png', 13, 5, 'Active', NULL, NULL),
+(42, 'SEO Training: Complete SEO Course & ChatGPT SEO Copywriting', 'seo-training-complete-seo-course-chatgpt-seo-copywriting', 'Learn SEO Copywriting: Unlock Your Digital Potential with AI, ChatGPT, WordPress & SEO Mastery\r\n\r\n“This course was exactly what I needed—practical, engaging, and truly inspiring! Tomas makes complex concepts easy, and now I feel confident in my SEO copywriting skills. Absolutely recommended!” – Jessica M.\r\n\r\nHello and welcome! I’m Ing. Tomas Moravek, your passionate guide on this thrilling journey into the heart of SEO copywriting mastery. Together with over 1,000,000 successful students, we\'ll unlock the full potential of your digital presence, transforming your dreams into tangible, powerful results.\r\n\r\nWhy This Course Will Change Everything for You\r\n\r\nImagine stepping into a world where your words not only resonate but captivate, compel, and convert effortlessly. This isn\'t just another SEO course—it\'s your gateway to mastering the art of SEO-driven copywriting, powered by the groundbreaking capabilities of ChatGPT, WordPress, WooCommerce, and more.\r\n\r\nThis course is designed with genuine passion and meticulous care, guiding you step by step to ensure clarity, creativity, and impactful results. Whether you\'re a complete beginner or looking to refine your expertise, you\'ll find every resource you need right here.', '', 100, NULL, 2000000, 2000000, 'uploads/682f4c25d042c_pro12.png', 13, 5, 'Active', NULL, NULL),
+(43, 'Digital Marketing Masterclass: AI & Social Media Marketing', 'digital-marketing-masterclass-ai-social-media-marketing', 'You\'re looking for a complete digital marketing course to teach you everything you need to become a digital marketing expert, right?\r\n\r\nYou\'ve found the right digital marketing course!\r\n\r\nWith the skills learned in our digital marketing course, you can:\r\n\r\nGROW your own business\r\n\r\nLAND a job in this hot marketing industry\r\n\r\nHELP a client increase their business\r\n\r\nWe want to help you grow your business with social media marketing, content marketing, email marketing, and more! \r\n\r\n\r\n\r\nThis digital marketing course contains sections & complete courses on so many topics & strategies. It\'s like getting free digital marketing courses in one masterclass!', '', 10, NULL, 2000000, 4500000, 'uploads/682f4c748afc7_pro13.png', 13, 5, 'Active', NULL, NULL),
+(44, 'AI-Powered Digital Marketer. ChatGPT & 80+ AI tools to grow', 'ai-powered-digital-marketer-chatgpt-80-ai-tools-to-grow', 'WHY THIS COURSE WILL REDEFINE YOUR CAREER\r\n\r\n61% of marketers already use AI to skyrocket productivity and results. The other 39% are being left behind. If you’re still doing everything manually, you’re already falling behind. This course will pull you ahead.\r\n\r\n\r\n\r\nWelcome to the practical and career-transforming AI-powered marketing course. This is not another generic tutorial filled with fluff and outdated tactics. This is a revolutionary career upgrade — designed to turn you into a high-performing, in-demand digital marketing strategist who knows how to delegate, automate, and dominate using the latest AI tools.\r\n\r\n\r\n\r\nThe truth is simple: Marketers who master AI now will own the next decade. And this course gives you the exact tools, workflows, and systems to stay ahead.', '', 10, NULL, 1000000, 4500000, 'uploads/682f4cf93ee94_pro14.png', 13, 11, 'Active', NULL, NULL),
+(45, 'Facebook Ads & Facebook Marketing MASTERY 2025 | Coursenvy', 'facebook-ads-facebook-marketing-mastery-2025-coursenvy', 'Want to become a Facebook Ads expert? JOIN THE 500+ COMPANIES I HAVE CONSULTED ON SOCIAL MEDIA MARKETING AND INCREASED CONVERSIONS FOR VIA FACEBOOK AND INSTAGRAM ADS! Facebook Marketing is a REQUIRED skill for anyone with a business, product, service, brand, or public figure they need to PROMOTE! Join our 200,000+ students who have MASTERED Facebook advertising with this COMPLETE Facebook Marketing Mastery Course! \r\nIn this course, you will learn Facebook Marketing from beginner level to advanced! We delve deep into EVERY aspect of Facebook and the Facebook Ads Manager. Learn how to use and optimize every type of Facebook campaign, Facebook custom audience, Facebook pixel... the things you will learn about Facebook are truly amazing and will instantly help advance your presence online!\r\n\r\nYou will be able to optimize your Facebook ads for increased conversions and decreased costs. You will be able to create and make use of EVERY type of Facebook ad. You will be able to grow your Facebook page likes and post engagement. You will be able to find new customers that will drive your brand to new heights via online marketing. Join this course now to learn how to take your brand, product, service, or public figure to the next level with the power of Facebook Marketing!\r\n\r\nTAKE A STEP IN THE RIGHT DIRECTION WITH YOUR LIFE AND BUSINESS... LEARN HOW FACEBOOK MARKETING, FACEBOOK ADS, AND SOCIAL MEDIA MARKETING WILL MAKE YOUR BUSINESSES A HOUSEHOLD NAME!\r\n\r\nENROLL NOW!', '', 10, NULL, 1000000, 4500000, 'uploads/682f4d5c16964_pro15.png', 13, 11, 'Active', NULL, NULL),
+(46, 'Life Coaching Practitioner Certification (Beginner-Advanced)', 'life-coaching-practitioner-certification-beginner-advanced-', 'Whether you\'re exploring life coaching for the first time or seeking to enhance your skills with a psychology-based approach to helping people, this thought-provoking course offers a great opportunity. By enrolling, you\'ll master an enlightening life coaching process that can lay the groundwork for a fulfilling and impactful career as a life coach.\r\n\r\nThis training dives beneath the surface of human behaviour, and explores the mindset patterns, attitudes, belief systems and the worldviews that can prevent people from being effective in their life pursuits. While this training isn\'t specifically intended to teach your about human psychology, you will by default, grow to understand yourself far better through this process.\r\n\r\nParticipants in this Life Coach training course will also learn effective communication skills, goal-setting strategies, and how to develop meaningful personalized coaching plans. The course covers timeless insights and principles that can be applied to understand and motivate clients, helping them overcome obstacles and achieve their personal and professional goals.\r\n\r\nThrough enlightening video lessons, reflective exercises, and real-world examples, participants will gain the knowledge, wisdom and skills necessary to guide others towards self-discovery and personal growth. They will learn how to support clients in setting specific goals, overcoming limiting beliefs, and creating actionable plans to achieve their desired outcomes.', '', 100, NULL, 1900000, 4500000, 'uploads/682f4dd7de090_pro16.png', 12, 12, 'Active', NULL, NULL),
+(47, 'NLP Practitioner Training (Neuro-Linguistic Programming)', 'nlp-practitioner-training-neuro-linguistic-programming-', 'Developed by Achology, this thought-provoking and enlightening training offers an in-depth exploration of Neuro-Linguistic Programming (NLP), a modern expression of Psychology that\'s devoted to equipping motivated learners with deep self-knowledge, awareness, emotional intelligence, and the ability to positively influence other people.\r\n\r\nNeuro-Linguistic Programming (NLP) is an approach to communication, personal growth, and psychotherapy that focuses on the connection between neurological processes (neuro-), language (linguistic), and behavioral patterns learned through experience (programming). It has been widely utilized in various fields such as business, education, sports, and therapy.\r\n\r\nLearners will delve into psychological theories and frameworks, drawing upon the work of influential figures such as Virginia Satir, Milton Erickson, Albert Ellis, Abraham Maslow, and others who influenced early NLP approaches. This exploration aims to equip students with a nuanced understanding of \'change dynamics\', tailored to help students share NLP with others.\r\n\r\nOur Neuro-Linguistic Programming Practitioner Training takes you far beyond the basics, providing an enlightening pathway to integrate NLP principles into every facet of your life. The philosophy of NLP revolves around the idea that our perceptions, beliefs, emotions, behaviors, attitudes, and communication styles are inherently linked to the outcomes we experience.', '', 100, NULL, 4500000, 2000000, 'uploads/682f4e214fec1_pro16.png', 12, 12, 'Active', NULL, NULL),
+(48, 'Mind Power - Change Your Thought Process To Change Your Life', 'mind-power---change-your-thought-process-to-change-your-life', 'You don’t need more motivation. You need better thinking.\r\n\r\nIf you’ve ever felt stuck, overwhelmed, or like you\'re capable of more but can’t seem to break through… the problem isn’t you — it’s your belief system. And the good news? That can change.\r\n\r\nMost of us go through life on mental autopilot — repeating the same thoughts, beliefs, and assumptions that shape everything from our mood to our income. These patterns are invisible… until you learn to see them.\r\n\r\nThis course helps you do exactly that — spot, shift, and rebuild the beliefs that quietly control your choices, emotions, and outcomes.\r\n\r\nYou won’t just learn about mindset—you’ll experience change from the inside out. This course combines deep psychology, storytelling, and step-by-step exercises to help you take control of your mental narrative and create the life you want.\r\n\r\nYou’ll Learn', '', 10, NULL, 5000000, 4500000, 'uploads/682f4e6dd550a_pro17.png', 12, 12, 'Active', NULL, NULL),
+(49, 'The Complete Job Interviewing Skills Masterclass Course', 'the-complete-job-interviewing-skills-masterclass-course', 'Interviewing skills are the difference between getting the appointment for the job interview versus getting the job offer. Great job interviewing skills are essential if you want the best jobs in today’s competitive job market.\r\n\r\n\r\nDoes the prospect of going into a strange room and answering questions from one or more strangers for 30-60 minutes and then having your entire career decided to intimidate you or make you nervous? You can become a master of interviewing skills.\r\n\r\n\r\nImagine walking into a job interview knowing that you will look and sound your best. You are completely confident that you can speak in a compelling and understanding manner. You know that you have great messages, examples, and stories about your experiences and experiences that the interview will find as compelling reasons as to why you are a great fit for this job. When you walk out of the interview you know that you did your very best, that the interviewer understands and respects your unique talents. Regardless of whether you get the job, you know you did the very best you could possibly do in the job interview and you make the best case possible as to why you should be hired.\r\n\r\n\r\n\r\n“For more than 30 years I have coached executives on their interviewing skills and presentation skills in the corporate world. I’m here to tell you that nobody is a natural at this. Job interviewing skills is something that anyone can learn but that nobody is born with. I have a simple, step-by-step process that will help you build confidence and skill in communicating effectively in job interviews. I can’t guarantee you will get every job offer, but I can assure you that I will help you come across your very best in every interview.”\r\n\r\n- TJ Walker, Instructor', '', 100, NULL, 2000000, 1000000, 'uploads/682f4ec867be9_pro18.png', 12, 12, 'Active', NULL, NULL),
+(50, '10X SUPERHUMAN Learning: Speed Reading & Memory Booster', '10x-superhuman-learning-speed-reading-memory-booster', 'Effective Learning 10X provides you with the best tools and strategies to boost your reading speed, memory, and learning. You’ll be amazed at how many hours you can save when you double or triple your reading speed. If you save just one hour a day for a year that equals 365 hours, or more than NINE 40-hour work weeks! What would you do with that extra time? Only for you to decide!\r\n\r\n\r\nEffective Learning  10X will enable you to:\r\n\r\nBecome faster, sharper, unstoppable in your daily life and career\r\n\r\nInstantly increase your reading speed by 50% just after the FIRST Hour of this course\r\n\r\nBoost focus and reduce subvocalization and regression\r\n\r\nReduce stress and frustration\r\n\r\nLearn anything at least 2-3 times quicker\r\n\r\nAchieve higher class exam scores\r\n\r\nQualify for your dream job\r\n\r\nImprove your comprehension by activating certain areas of your brain\r\n\r\nReprogram your mind to stop forgetting\r\n\r\nRemember all the names and relevant facts\r\n\r\nUnleash quick recall in any situation\r\n\r\nThorough course providing ways to increase reading speed & how to focus upon your studies. I have some new ways to enhance my University studies.   - Kylie (Student)\r\n\r\nThere are no poor readers, just people with good and bad reading habits.\r\n\r\nEffective Learning 10X will simplify your work and reading by improving the four essential components of active learning: speed, comprehension, focus, and retention.', '', 100, NULL, 5000000, 4500000, 'uploads/682f4f71268e8_pro19.png', 12, 12, 'Active', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `comment` text NOT NULL,
+  `rating` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `phone` varchar(30) NOT NULL,
+  `address` text NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL DEFAULT 'Active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `phone`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyen Minh Tuan', 'admin@gmail.com', '2023-10-17 01:30:09', '123456', NULL, '', '', 'Active', NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admins_email_unique` (`email`);
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `brands_slug_unique` (`slug`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `categories_slug_unique` (`slug`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `newscategories`
+--
+ALTER TABLE `newscategories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_details_order_id_foreign` (`order_id`),
+  ADD KEY `order_details_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `products_slug_unique` (`slug`),
+  ADD KEY `products_category_id_foreign` (`category_id`),
+  ADD KEY `products_brand_id_foreign` (`brand_id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reviews_user_id_foreign` (`user_id`),
+  ADD KEY `reviews_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `newscategories`
+--
+ALTER TABLE `newscategories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `order_details_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `order_details_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
